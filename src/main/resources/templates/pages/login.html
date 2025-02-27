@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{fragments/fragments :: head}"></head>
+
+<body class="container d-flex align-items-center py-4">
+	<main class="form-signin w-100 m-auto">
+		<div th:if="${param.logout}">
+			<p>Logout effettuato con successo</p>
+		</div>
+		<div th:if="${param.error}">
+			<p class="alert alert-danger">Credenziali non valide. Riprova.</p>
+		</div>
+		<form th:action="@{/pages/login}" method="post" id="loginForm">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			<h1 id="login-index" class="h3 mb-3 fw-normal">Login</h1>
+
+			<div class="form-floating">
+				<input type="text" class="form-control" id="username" name="username" placeholder="name@example.com" />
+				<label for="username">Username</label>
+			</div>
+			<div class="form-floating">
+				<input type="password" class="form-control" id="password" name="password" placeholder="Password" />
+				<label for="password">Password</label>
+			</div>
+
+			<button class="btn btn-primary w-100 py-2 mb-3" type="submit">Accedi</button>
+		</form>
+
+		
+	</main>
+
+	
+</body>
+
+</html>

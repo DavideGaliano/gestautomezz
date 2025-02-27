@@ -1,0 +1,14 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.home-container {
+    background-color: #007bff; /* Blu */
+    height: 100vh;
+    text-align: center;
+}
+
+.logo {
+    width: 500px; /* Imposta la dimensione dell'immagine */
+}
