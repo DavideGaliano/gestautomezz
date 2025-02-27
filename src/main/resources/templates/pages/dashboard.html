@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:insert="~{fragments/fragments :: head}"></head>
+
+
 <body>
-    <h1>Benvenuto nella Dashboard!</h1>
-    <p>Sei autenticato.</p>
-    <a href="/logout">Logout</a>
+
+	<header th:insert="~{fragments/fragments :: header}" class="mb-4"></header>
+
+	<main>
+		<h1>Benvenuto nella Dashboard!</h1>
+		<p>Sei autenticato.</p>
+		<a href="/logout">Logout</a>
+	</main>
 </body>
+
 </html>

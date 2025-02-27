@@ -33,6 +33,66 @@
 	</th:block>
 </head>
 
+<header th:fragment="header">
+	<!-- Navbar Fragment -->
+	<div class="px-3 py-2 bg-primary border-bottom">
+		<div class="container">
+			<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+				<a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+					<img th:src="@{/img/logo_powering_white.png}" alt="Logo Powering" width="300" height="62">
+				</a>
+
+				<ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}"
+							th:classappend="${route == 'home' ? 'active' : 'non-active'}"><i
+								class="fa-solid fa-house nav-icon"></i>
+							Home</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/pages/dashboard}"
+							th:classappend="${route == 'dashboard' ? 'active' : 'non-active'}"><i
+								class="fa-solid fa-building"></i>Filiali</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/pages/automezzi}"
+							th:classappend="${route == 'automezzi' ? 'active' : 'non-active'}"><i
+								class="fa-solid fa-truck"></i>Automezzi</a>
+					</li>
+
+
+					<li class="nav-item" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+						<a class="nav-link" th:href="@{/pages/admin/users}"
+							th:classappend="${route == 'users' ? 'active' : 'non-active'}"><i
+								class="fa-solid fa-headphones"></i>Operatori</a>
+					</li>
+
+
+
+					<!-- Se l'utente è autenticato -->
+					<li class="nav-item"
+						th:if="${#authentication.principal instanceof T(org.springframework.security.core.userdetails.User)}">
+						<a class="nav-link" href="#" onclick="document.getElementById('logoutForm').submit();">
+							<i class="fa-solid fa-person-running"></i> Logout
+						</a>
+						<form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;"></form>
+					</li>
+
+					<!-- Se l'utente non è autenticato -->
+					<li class="nav-item" th:if="${#authentication.principal == 'anonymousUser'}">
+						<a class="nav-link" th:href="@{/pages/login}"
+							th:classappend="${route == 'login' ? 'active' : 'non-active'}"><i
+								class="fa-solid fa-right-to-bracket"></i>Accedi</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+</header>
+
 
 <body>
 

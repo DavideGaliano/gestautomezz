@@ -4,7 +4,7 @@ body, html {
 }
 
 .home-container {
-    background-color: #007bff; /* Blu */
+    background-color: #007bff; 
     height: 100vh;
     text-align: center;
 }
@@ -12,3 +12,44 @@ body, html {
 .logo {
     width: 500px; /* Imposta la dimensione dell'immagine */
 }
+
+/* Assicura che la navbar sia visibile nei dispositivi piccoli */
+.navbar-collapse {
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+/* Assicura che il logo sia centrato su mobile */
+.navbar-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+/* Stile per l'header */
+.bg-primary {
+    background-color: #007bff !important;
+}
+
+/* Rendi il testo e le icone bianche */
+.nav a.nav-link {
+    color: white !important;
+}
+
+/* Cambia colore all'hover */
+.nav a.nav-link:hover {
+    color: #f8f9fa !important; 
+}
+
+/* Assicura che le icone siano bianche */
+.nav i {
+    color: white !important;
+}
+
+
+.navbar-brand img {
+    max-width: 100%;
+    height: auto;
+}
+
