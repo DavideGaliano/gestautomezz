@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.azienda.gestautomezz.model.Automezzo;
+import com.azienda.gestautomezz.model.AutomezzoRequest;
 import com.azienda.gestautomezz.repository.AutomezzoRepository;
 
 @Service
@@ -26,28 +27,20 @@ public class AutomezzoService {
         this.restTemplate = restTemplate;
     }
 
-	public String sendAutomezziData(List<Automezzo> automezzi) {
+	public String sendAutomezziData(AutomezzoRequest request) {
         String url = "https://edoo.poweringsrl.it/exercises/Automezzo/upload.json";
 
-        // Username e password per autenticazione
-        String username = "admin";
-        String password = "admin123";
-
-        // Creazione dell'header con Basic Authentication
+        // Crea gli headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String auth = username + ":" + password;
-        String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes());
-        headers.set("Authorization", "Basic " + encodedAuth);
 
-        HttpEntity<List<Automezzo>> requestEntity = new HttpEntity<>(automezzi, headers);
+        // Crea l'oggetto della richiesta con email e automezzi
+        HttpEntity<AutomezzoRequest> entity = new HttpEntity<>(request, headers);
 
-        try {
-            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
-            return response.getBody();
-        } catch (Exception e) {
-            return "Errore durante l'invio: " + e.getMessage();
-        }
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+
+        return response.getBody();
     }
 	
 	@Autowired

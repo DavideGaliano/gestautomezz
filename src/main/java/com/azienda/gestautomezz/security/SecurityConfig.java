@@ -47,6 +47,7 @@ public class SecurityConfig  {
 	@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+        .csrf(csrf -> csrf.disable())
         .logout((logout) -> logout
         		.logoutUrl("/logout")
         		.logoutSuccessUrl("/pages/login?logout")
@@ -57,6 +58,8 @@ public class SecurityConfig  {
             .authorizeHttpRequests((requests) -> requests
                 .requestMatchers( "/css/**", "/js/**", "/webjars/**", "/img/**","/videos/**").permitAll()
                 .requestMatchers("/", "/pages/login").permitAll()
+                .requestMatchers("/api/automezzi/send").permitAll()
+                .requestMatchers("/api/filiali/send").permitAll()
                 .requestMatchers("/pages/**","/automezzi/**","/filiali/**","/users/**").hasRole("ADMIN")
                 .requestMatchers("/pages/**","/automezzi/**","/filiali/**").hasRole("USER")
                 .anyRequest().authenticated()
