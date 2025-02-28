@@ -19,8 +19,4 @@ public class LoginController {
         return "pages/login"; 
     }
 
-    @GetMapping("/pages/dashboard")
-    public String showDashboard() {
-        return "pages/dashboard"; 
-    }
 }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{fragments/fragments :: head}"></head>
+
+
+<body>
+
+	<header th:insert="~{fragments/fragments :: header}" class="mb-4"></header>
+
+	<main class="container">
+		<div class="row">
+			<div class="col-12">
+				<h1 class="py-4 mb-2 text-center">
+					Dettaglio Filiale [[ ${filiale.codice}]]
+				</h1>
+				<th:block>
+					<div class="card">
+
+						<div class="card-body">
+							<h5 class="card-title">Codice : [[${filiale.codice}]]</h5>
+							<p class="card-text">Indirizzo : [[${filiale.indirizzo}]]</p>
+							<p class="card-text">Città : [[${filiale.città}]]</p>
+							<p class="card-text">Cap : [[${filiale.cap}]]</p>
+
+
+							<h2>Automezzi</h2>
+							<th:block th:if="${automezzi.size > 0}">
+								<table class="table">
+									<tr>
+										<th>Targa</th>
+										<th>Marca</th>
+										<th>Modello</th>
+										<th>Azioni</th>
+									</tr>
+									<tr th:each="automezzo : ${automezzi}">
+										<td th:text="${automezzo.targa}"></td>
+										<td th:text="${automezzo.marca}"></td>
+										<td th:text="${automezzo.modello}"></td>
+										<td>
+											<a th:href="@{/automezzi/{automezzoId}/edit(automezzoId=${automezzo.id})}"
+												class="btn btn-secondary">Modifica</a>
+											<!-- Button trigger modal -->
+											<button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+												th:data-bs-target="'#delete-modal-' + ${automezzo.id}">
+												Delete
+											</button>
+
+											<!-- Modal -->
+											<div class="modal fade" th:id="'delete-modal-' + ${automezzo.id}"
+												tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h1 class="modal-title fs-5" id="exampleModalLabel">Conferma
+																Cancellazione</h1>
+															<button type="button" class="btn-close"
+																data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body">
+															Sei sicuro di voler cancellare [[${automezzo.id}]]
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary"
+																data-bs-dismiss="modal">Close</button>
+															<form class="d-inline-block"
+																th:action="@{/automezzi/delete/{id}(id=${automezzo.id})}"
+																method="POST">
+
+																<button type="submit"
+																	class="btn btn-sm btn-danger">Delete</button>
+
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</table>
+							</th:block>
+							<a th:href="@{/pages/dashboard}" class="btn btn-primary">Indietro</a>
+						</div>
+					</div>
+				</th:block>
+			</div>
+
+		</div>
+
+
+
+	</main>
+
+
+	<!-- Bootstrap JS and dependencies -->
+	<div th:replace="~{fragments/fragments :: scripts} "></div>
+</body>
+
+</html>

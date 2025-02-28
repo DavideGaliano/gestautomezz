@@ -12,11 +12,11 @@
 			<div class="row">
 				<div class="col-12">
 					<h1>
-						Filiali
+						Automezzi
 					</h1>
 
 					<!--Bottone Crea Pizza-->
-					<a th:href="@{/filiali/create}" class="btn btn-success mb-4">Crea Nuova Filiale</a>
+					<a th:href="@{/automezzi/create}" class="btn btn-success mb-4">Crea Nuovo Automezzo</a>
 
 					<th:block th:if="${successMessage != null}">
 
@@ -24,35 +24,35 @@
 
 					</th:block>
 
-					<th:block th:if="${filiali.size() > 0 }">
+					<th:block th:if="${automezzi.size() > 0 }">
 						<table class="table table-striped table-hover">
 							<thead>
 								<tr>
 									<th>Cod</th>
-									<th>Indirizzo</th>
-									<th>Città</th>
-									<th>Cap</th>
+									<th>Targa</th>
+									<th>Marca</th>
+									<th>Modello</th>
 									<th class="button-headers"></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="filiale : ${filiali}">
-									<td th:text="${filiale.codice}"></td>
-									<td th:text="${filiale.indirizzo}"></td>
-									<td th:text="${filiale.città}"></td>
-									<td th:text="${filiale.cap}"></td>
+								<tr th:each="automezzo : ${automezzi}">
+									<td th:text="${automezzo.id}"></td>
+									<td th:text="${automezzo.targa}"></td>
+									<td th:text="${automezzo.marca}"></td>
+									<td th:text="${automezzo.modello}"></td>
 									
-									<td><a th:href="@{/filiali/{codice}(codice=${filiale.codice})}" class="btn btn-sm btn-primary"> Show</a>
-										<a th:href="@{/filiali/edit/{codice}(codice=${filiale.codice})}" class="btn btn-sm btn-success">
+									<td><a th:href="@{/automezzi/{id}(id=${automezzo.id})}" class="btn btn-sm btn-primary"> Show</a>
+										<a th:href="@{/automezzi/edit/{id}(id=${automezzo.id})}" class="btn btn-sm btn-success">
 											Edit</a>
 										<!-- Button trigger modal -->
 										<button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-											th:data-bs-target="'#delete-modal-' + ${filiale.codice}">
+											th:data-bs-target="'#delete-modal-' + ${automezzo.id}">
 											Delete
 										</button>
 
 										<!-- Modal -->
-										<div class="modal fade" th:id="'delete-modal-' + ${filiale.codice}" tabindex="-1"
+										<div class="modal fade" th:id="'delete-modal-' + ${automezzo.id}" tabindex="-1"
 											aria-labelledby="delete-modal" aria-hidden="true">
 											<div class="modal-dialog modal-dialog-centered">
 												<div class="modal-content">
@@ -63,13 +63,13 @@
 															aria-label="Close"></button>
 													</div>
 													<div class="modal-body">
-														Sei sicuro di voler cancellare [[${filiale.codice}]]
+														Sei sicuro di voler cancellare [[${automezzo.id}]]
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-secondary"
 															data-bs-dismiss="modal">Close</button>
 														<form class="d-inline-block"
-															th:action="@{/filiali/delete/{codice}(codice=${filiale.codice})}" method="POST">
+															th:action="@{/automezzi/delete/{id}(id=${automezzo.id})}" method="POST">
 
 															<button type="submit"
 																class="btn btn-sm btn-danger">Delete</button>
@@ -85,8 +85,8 @@
 
 						</table>
 					</th:block>
-					<th:block th:unless="${filiali.size() > 0 }">
-						<h3>Non ci sono Filiali registrate</h3>
+					<th:block th:unless="${automezzi.size() > 0 }">
+						<h3>Non ci sono Automezzi registrati</h3>
 					</th:block>
 				</div>
 

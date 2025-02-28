@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{fragments/fragments :: head}"></head>
+
+<body>
+	
+	<header th:insert="~{fragments/fragments :: header}" class="mb-4"></header>
+	
+	<main class="container">
+			<div class="row">
+				<div class="col-12">
+					<h1 class="py-4 mb-2 text-center">
+						Modifica Filiale
+					</h1>
+					<th:block>
+						<form th:action="@{/filiali/edit/{codice}( codice=${filiale.codice})}" method="POST" id="filiale-form" th:object="${filiale}">
+							
+						  <div class="mb-3">
+						    <label for="filialeIndirizzo" class="form-label">Indirizzo</label>
+						    <input type="text" class="form-control" id="indirizzo" aria-describedby="filialeIndirizzo" th:field="*{indirizzo}">
+							<div class="text-danger" th:if="${#fields.hasErrors('indirizzo')}" th:errors="*{indirizzo}"></div>
+						  </div>
+						  <div class="mb-3">
+							<label for="filialeCitta" class="form-label">Città</label>
+						  	<input type="text" class="form-control" id="citta" aria-describedby="filialeCitta" th:field="*{città}">
+							<div class="text-danger" th:if="${#fields.hasErrors('città')}" th:errors="*{città}"></div>
+						  </div>
+						  <div class="mb-3">
+						  	<label for="filialeCap" class="form-label">Cap</label>
+						  	<input type="text" class="form-control" id="cap" aria-describedby="filialeCap" th:field="*{cap}">
+							<div class="text-danger" th:if="${#fields.hasErrors('cap')}" th:errors="*{cap}"></div>
+						  </div>
+						
+						<!-- Lista degli ingredienti -->
+						        <div class="mb-3">
+						            <h3>Seleziona Automezzi</h3>
+						            <div th:each="automezzo : ${automezzi}">
+						                <input type="checkbox" th:field="*{automezzi}" th:value="${automezzo.id}">
+						                <span th:text="${automezzo.targa}"></span>
+						            </div>
+						        </div>
+						<div class="d-flex justify-content-between">
+							
+							<input type="submit" class="btn btn-primary btn-lg" value="Aggiorna">
+							<input type="reset" class="btn btn-warning btn-lg" value="Reset">
+							
+						</div>
+						</form>
+					</th:block>
+					
+				</div>
+				
+			</div>
+			
+			
+			
+		</main>
+		
+		<!-- Bootstrap JS and dependencies -->
+			<div th:replace="~{fragments/fragments :: scripts} "></div>
+</body>
+
+</html>

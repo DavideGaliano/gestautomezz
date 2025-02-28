@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 public class Automezzo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codice;
+    private Long id;
     
     private String targa;
     private String marca;
@@ -23,12 +23,12 @@ public class Automezzo {
     @JoinColumn(name = "filiale_codice", nullable = true)
     private Filiale filiale;
 
-	public Long getCodice() {
-		return codice;
+	public Long getId() {
+		return id;
 	}
 
-	public void setCodice(Long codice) {
-		this.codice = codice;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTarga() {

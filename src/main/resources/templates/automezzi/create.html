@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{fragments/fragments :: head}"></head>
+
+<body>
+
+	<header th:insert="~{fragments/fragments :: header}" class="mb-4"></header>
+
+	<main class="container">
+		<div class="row">
+			<div class="col-12">
+				<h1 class="py-4 mb-2 text-center">
+					Crea Automezzo
+				</h1>
+				<th:block>
+					<form th:action="@{/automezzi/create}" method="POST" id="automezzo-form" th:object="${automezzo}">
+
+						<div class="mb-3">
+							<label for="automezzoTarga" class="form-label">Targa</label>
+							<input type="text" class="form-control" id="targa" aria-describedby="automezzoTarga"
+								th:field="*{targa}">
+							<div class="text-danger" th:if="${#fields.hasErrors('targa')}" th:errors="*{targa}"></div>
+						</div>
+						<div class="mb-3">
+							<label for="automezzoMarca" class="form-label">Marca</label>
+							<input type="text" class="form-control" id="marca" aria-describedby="automezzoMarca"
+								th:field="*{marca}">
+							<div class="text-danger" th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"></div>
+						</div>
+						<div class="mb-3">
+							<label for="automezzoModello" class="form-label">Modello</label>
+							<input type="text" class="form-control" id="modello" aria-describedby="automezzoModello"
+								th:field="*{modello}">
+							<div class="text-danger" th:if="${#fields.hasErrors('modello')}" th:errors="*{modello}">
+							</div>
+						</div>
+
+						<!-- Dropdown per selezionare una singola filiale -->
+						<div class="mb-3">
+							<label for="filiale" class="form-label">Seleziona Filiale</label>
+							<select class="form-select" id="filiale" th:field="*{filiale}" required>
+								<option value="" selected disabled>Seleziona una filiale</option>
+								<option th:each="filiale : ${filiali}" th:value="${filiale.codice}"
+									 th:text="|ID: ${filiale.codice} - ${filiale.città}, ${filiale.indirizzo}, ${filiale.cap}|">
+								</option>
+							</select>
+						</div>
+						<div class="d-flex justify-content-between">
+
+							<input type="submit" class="btn btn-primary btn-lg" value="Crea">
+							<input type="reset" class="btn btn-warning btn-lg" value="Reset">
+
+						</div>
+					</form>
+				</th:block>
+
+			</div>
+
+		</div>
+
+
+
+	</main>
+
+	<!-- Bootstrap JS and dependencies -->
+	<div th:replace="~{fragments/fragments :: scripts} "></div>
+</body>
+
+</html>
