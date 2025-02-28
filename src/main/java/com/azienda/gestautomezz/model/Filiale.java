@@ -2,6 +2,8 @@ package com.azienda.gestautomezz.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +24,7 @@ public class Filiale {
     private String cap;
     
     @OneToMany(mappedBy = "filiale", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Automezzo> automezzi;
 	
     

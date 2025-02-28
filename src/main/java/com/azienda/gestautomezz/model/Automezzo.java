@@ -1,5 +1,7 @@
 package com.azienda.gestautomezz.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +23,7 @@ public class Automezzo {
 
     @ManyToOne
     @JoinColumn(name = "filiale_codice", nullable = true)
+    @JsonBackReference
     private Filiale filiale;
 
 	public Long getId() {

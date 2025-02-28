@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.azienda.gestautomezz.model.Filiale;
 import com.azienda.gestautomezz.model.Role;
 import com.azienda.gestautomezz.model.User;
 import com.azienda.gestautomezz.repository.UserRepository;
@@ -24,6 +25,10 @@ public class UserService {
         userRepository.save(user);
     }
     
+    public List<User> findAll() {
+		return userRepository.findAll();
+	}
+    
     public User findById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
@@ -39,5 +44,10 @@ public class UserService {
  // Verifica se un username esiste già
     public boolean existsByUsername(String username) {
         return userRepository.existsByUsername(username);
+    }
+    
+    
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
     }
 }

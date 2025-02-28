@@ -41,7 +41,7 @@
 											<a th:href="@{/automezzi/{automezzoId}/edit(automezzoId=${automezzo.id})}"
 												class="btn btn-secondary">Modifica</a>
 											<!-- Button trigger modal -->
-											<button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+											<button type="button" class="btn btn-warning" data-bs-toggle="modal"
 												th:data-bs-target="'#delete-modal-' + ${automezzo.id}">
 												Delete
 											</button>
@@ -68,7 +68,7 @@
 																method="POST">
 
 																<button type="submit"
-																	class="btn btn-sm btn-danger">Delete</button>
+																	class="btn btn-danger">Delete</button>
 
 															</form>
 														</div>

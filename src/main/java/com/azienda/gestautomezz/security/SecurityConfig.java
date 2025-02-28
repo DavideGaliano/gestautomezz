@@ -57,7 +57,8 @@ public class SecurityConfig  {
             .authorizeHttpRequests((requests) -> requests
                 .requestMatchers( "/css/**", "/js/**", "/webjars/**", "/img/**","/videos/**").permitAll()
                 .requestMatchers("/", "/pages/login").permitAll()
-                .requestMatchers("/pages/**").hasRole("ADMIN")
+                .requestMatchers("/pages/**","/automezzi/**","/filiali/**","/users/**").hasRole("ADMIN")
+                .requestMatchers("/pages/**","/automezzi/**","/filiali/**").hasRole("USER")
                 .anyRequest().authenticated()
             )
             .formLogin((form) -> form

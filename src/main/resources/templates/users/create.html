@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{fragments/fragments :: head}"></head>
+
+<body>
+
+	<header th:insert="~{fragments/fragments :: header}" class="mb-4"></header>
+
+	<main class="container">
+		<div class="row">
+			<div class="col-12">
+				<h1 class="py-4 mb-2 text-center">
+					Crea Operatore
+				</h1>
+				<th:block>
+					<form th:action="@{/users/create}" method="POST" id="user-form" th:object="${user}">
+
+						<div class="mb-3">
+							<label for="userUsername" class="form-label">Username</label>
+							<input type="text" class="form-control" id="username" aria-describedby="userUsername"
+								th:field="*{username}">
+							<div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+						</div>
+						<div class="mb-3">
+							<label for="userPassword" class="form-label">Password</label>
+							<input type="password" class="form-control" id="password" aria-describedby="userPassword"
+								th:field="*{password}">
+							<div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+						</div>
+						
+						<div class="d-flex justify-content-between">
+
+							<input type="submit" class="btn btn-primary btn-lg" value="Crea">
+							<input type="reset" class="btn btn-warning btn-lg" value="Reset">
+
+						</div>
+					</form>
+				</th:block>
+
+			</div>
+
+		</div>
+
+
+
+	</main>
+
+	<!-- Bootstrap JS and dependencies -->
+	<div th:replace="~{fragments/fragments :: scripts} "></div>
+</body>
+
+</html>
