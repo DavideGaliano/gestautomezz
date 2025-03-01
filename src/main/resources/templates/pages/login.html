@@ -12,7 +12,7 @@
 			<p class="alert alert-danger">Credenziali non valide. Riprova.</p>
 		</div>
 		<form th:action="@{/pages/login}" method="post" id="loginForm">
-			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			<input type="hidden" name="_csrf" th:value="${_csrf != null ? _csrf.token : ''}" />
 			<h1 id="login-index" class="h3 mb-3 fw-normal">Login</h1>
 
 			<div class="form-floating">

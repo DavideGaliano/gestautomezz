@@ -9,109 +9,121 @@
 	<header th:insert="~{fragments/fragments :: header}" class="mb-4"></header>
 
 	<main class="container">
-			<div class="row">
-				<div class="col-12">
-					<h1>
-						Filiali
-					</h1>
+		<div class="row">
+			<div class="col-12">
+				<h1>
+					Filiali
+				</h1>
 
-					<!--Bottone Crea Pizza-->
-					<a th:href="@{/filiali/create}" class="btn btn-success mb-4">Crea Nuova Filiale</a>
+				<!--Bottone Crea Filiale-->
+				<a th:href="@{/filiali/create}" class="btn btn-success mb-4">Crea Nuova Filiale</a>
 
-					<th:block th:if="${successMessage != null}">
+				<!-- Bottone Send JSON -->
+				<button id="sendJsonButton" class="btn btn-primary mb-4">Send JSON</button>
 
-						<div th:replace="~{fragments/fragments :: successAlert(${successMessage})}"></div>
+				<!-- Messaggio di feedback -->
+				<div id="sendJsonMessage" class="alert d-none"></div>
 
-					</th:block>
+				<th:block th:if="${successMessage != null}">
 
-					<th:block th:if="${filiali.size() > 0 }">
-						<div class="mb-3">
-						    <input type="text" class="form-control" id="searchInput" placeholder="Cerca una filiale..." onkeyup="filterTable()">
-						</div>
+					<div th:replace="~{fragments/fragments :: successAlert(${successMessage})}"></div>
 
-						
-						<table class="table table-striped table-hover table-bordered align-middle shadow-sm rounded">
-							<thead>
-								<tr>
-									<th>Cod</th>
-									<th>Indirizzo</th>
-									<th>Città</th>
-									<th>Cap</th>
-									<th class="button-headers"></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="filiale : ${filiali}">
-									<td th:text="${filiale.codice}"></td>
-									<td th:text="${filiale.indirizzo}"></td>
-									<td th:text="${filiale.città}"></td>
-									<td th:text="${filiale.cap}"></td>
-									
-									<td><a th:href="@{/filiali/{codice}(codice=${filiale.codice})}" class="btn btn-sm btn-primary"> Show</a>
-										<a th:href="@{/filiali/edit/{codice}(codice=${filiale.codice})}" class="btn btn-sm btn-success">
-											Edit</a>
-										<!-- Button trigger modal -->
-										<button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-											th:data-bs-target="'#delete-modal-' + ${filiale.codice}">
-											Delete
-										</button>
+				</th:block>
 
-										<!-- Modal -->
-										<div class="modal fade" th:id="'delete-modal-' + ${filiale.codice}" tabindex="-1"
-											aria-labelledby="delete-modal" aria-hidden="true">
-											<div class="modal-dialog modal-dialog-centered">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h1 class="modal-title fs-5" id="exampleModalLabel">Conferma
-															Cancellazione</h1>
-														<button type="button" class="btn-close" data-bs-dismiss="modal"
-															aria-label="Close"></button>
-													</div>
-													<div class="modal-body">
-														Sei sicuro di voler cancellare [[${filiale.codice}]]
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-secondary"
-															data-bs-dismiss="modal">Close</button>
-														<form class="d-inline-block"
-															th:action="@{/filiali/delete/{codice}(codice=${filiale.codice})}" method="POST">
+				<th:block th:if="${filiali.size() > 0 }">
+					<div class="mb-3">
+						<input type="text" class="form-control" id="searchInput" placeholder="Cerca una filiale..."
+							onkeyup="filterTable()">
+					</div>
 
-															<button type="submit"
-																class="btn btn-danger">Delete</button>
 
-														</form>
-													</div>
+					<table class="table table-striped table-hover table-bordered align-middle shadow-sm rounded">
+						<thead>
+							<tr>
+								<th>Cod</th>
+								<th>Indirizzo</th>
+								<th>Città</th>
+								<th>Cap</th>
+								<th class="button-headers"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="filiale : ${filiali}">
+								<td th:text="${filiale.codice}"></td>
+								<td th:text="${filiale.indirizzo}"></td>
+								<td th:text="${filiale.città}"></td>
+								<td th:text="${filiale.cap}"></td>
+
+								<td><a th:href="@{/filiali/{codice}(codice=${filiale.codice})}"
+										class="btn btn-sm btn-primary"> Show</a>
+									<a th:href="@{/filiali/edit/{codice}(codice=${filiale.codice})}"
+										class="btn btn-sm btn-success">
+										Edit</a>
+									<!-- Button trigger modal -->
+									<button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
+										th:data-bs-target="'#delete-modal-' + ${filiale.codice}">
+										Delete
+									</button>
+
+									<!-- Modal -->
+									<div class="modal fade" th:id="'delete-modal-' + ${filiale.codice}" tabindex="-1"
+										aria-labelledby="delete-modal" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title fs-5" id="exampleModalLabel">Conferma
+														Cancellazione</h1>
+													<button type="button" class="btn-close" data-bs-dismiss="modal"
+														aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													Sei sicuro di voler cancellare [[${filiale.codice}]]
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">Close</button>
+													<form class="d-inline-block"
+														th:action="@{/filiali/delete/{codice}(codice=${filiale.codice})}"
+														method="POST">
+
+														<button type="submit" class="btn btn-danger">Delete</button>
+
+													</form>
 												</div>
 											</div>
 										</div>
-									</td>
-								</tr>
-							</tbody>
+									</div>
+								</td>
+							</tr>
+						</tbody>
 
-						</table>
-					</th:block>
-					<th:block th:unless="${filiali.size() > 0 }">
-						<h3>Non ci sono Filiali registrate</h3>
-					</th:block>
-				</div>
-
+					</table>
+				</th:block>
+				<th:block th:unless="${filiali.size() > 0 }">
+					<h3>Non ci sono Filiali registrate</h3>
+				</th:block>
 			</div>
 
+		</div>
 
 
-		</main>
-		
-		<!-- Bootstrap JS and dependencies -->
-			<div th:replace="~{fragments/fragments :: scripts} "></div>
-			<script>
-									function filterTable() {
-									    let input = document.getElementById("searchInput").value.toLowerCase();
-									    let rows = document.querySelectorAll("tbody tr");
-									    rows.forEach(row => {
-									        row.style.display = row.innerText.toLowerCase().includes(input) ? "" : "none";
-									    });
-									}
-									</script>
+
+	</main>
+
+	<!-- Bootstrap JS and dependencies -->
+	<div th:replace="~{fragments/fragments :: scripts} "></div>
+	<script>
+		function filterTable() {
+			let input = document.getElementById("searchInput").value.toLowerCase();
+			let rows = document.querySelectorAll("tbody tr");
+			rows.forEach(row => {
+				row.style.display = row.innerText.toLowerCase().includes(input) ? "" : "none";
+			});
+		}
+	</script>
+
+	<!--Invio JSON-->
+	
 </body>
 
 </html>
