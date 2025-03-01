@@ -14,12 +14,15 @@
 				<h1>
 					Filiali
 				</h1>
+				<div class="d-flex gap-2 mb-4">
+				    <!-- Bottone Crea Filiale -->
+				    <a th:href="@{/filiali/create}" class="btn btn-success">Crea Nuova Filiale</a>
 
-				<!--Bottone Crea Filiale-->
-				<a th:href="@{/filiali/create}" class="btn btn-success mb-4">Crea Nuova Filiale</a>
-
-				<!-- Bottone Send JSON -->
-				<a th:href="@{/api/filiali/send}" class="btn btn-primary mb-4">Send JSON</a>
+				    <!-- Bottone Send JSON -->
+				    <form action="/api/filiali/send" method="post">
+				        <button type="submit" class="btn btn-primary">Send JSON</button>
+				    </form>
+				</div>
 
 				<!-- Messaggio di feedback -->
 				<div id="sendJsonMessage" class="alert d-none"></div>

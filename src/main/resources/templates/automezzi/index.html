@@ -14,9 +14,15 @@
 				<h1>
 					Automezzi
 				</h1>
+				<div class="d-flex gap-2 mb-4">
+					<!-- Bottone Crea Filiale -->
+					<a th:href="@{/automezzi/create}" class="btn btn-success">Crea Nuovo Automezzo</a>
 
-				<!--Bottone Crea Automezzo-->
-				<a th:href="@{/automezzi/create}" class="btn btn-success mb-4">Crea Nuovo Automezzo</a>
+					<!-- Bottone Send JSON -->
+					<form action="/api/automezzi/send" method="post">
+						<button type="submit" class="btn btn-primary">Send JSON</button>
+					</form>
+				</div>
 
 				<th:block th:if="${successMessage != null}">
 
