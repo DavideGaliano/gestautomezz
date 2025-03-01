@@ -26,9 +26,11 @@ public class FilialeRestController {
         return filialeService.findAll();
     }
     
+ // POST - Invia le filiali insieme all'email
     @PostMapping("/send")
-    public ResponseEntity<String> sendFiliali(@RequestBody FilialeRequest request) {
-        String response = filialeService.sendFilialiData(request);
+    public ResponseEntity<String> sendFiliali() {
+    	String email = "admin@example.com";
+        String response = filialeService.sendFilialiData(email);
         return ResponseEntity.ok(response);
     }
 }

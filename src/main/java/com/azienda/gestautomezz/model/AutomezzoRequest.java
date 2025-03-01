@@ -5,6 +5,12 @@ import java.util.List;
 public class AutomezzoRequest {
     private String email;
     private List<Automezzo> automezzi;
+    
+ // Costruttore
+    public AutomezzoRequest(String email, List<Automezzo> automezzi) {
+        this.email = email;
+        this.automezzi = automezzi;
+    }
 
     // Getters e Setters
     public String getEmail() {

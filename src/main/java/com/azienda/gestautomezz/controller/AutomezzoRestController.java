@@ -19,8 +19,9 @@ public class AutomezzoRestController {
     }
 
     @PostMapping("/send")
-    public ResponseEntity<String> sendAutomezzi(@RequestBody AutomezzoRequest request) {
-        String response = automezzoService.sendAutomezziData(request);
+    public ResponseEntity<String> sendAutomezzi() {
+    	String email = "admin@example.com";
+        String response = automezzoService.sendAutomezziData(email);
         return ResponseEntity.ok(response);
     }
 }

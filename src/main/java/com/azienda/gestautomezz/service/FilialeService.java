@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.azienda.gestautomezz.model.Filiale;
@@ -40,20 +41,32 @@ public class FilialeService {
     }
 	 
 	 
-	 public String sendFilialiData(FilialeRequest request) {
-	        String url = "https://edoo.poweringsrl.it/exercises/Filiale/upload.json"; 
+	 public String sendFilialiData(String email) {
+		 String url = "https://edoo.poweringsrl.it/exercises/Filiale/upload.json";
 
-	        // Crea gli headers
-	        HttpHeaders headers = new HttpHeaders();
-	        headers.setContentType(MediaType.APPLICATION_JSON);
+		    // Recupera tutte le filiali dal database
+		    List<Filiale> filiali = filialeRepository.findAll();
 
-	        // Crea il corpo della richiesta
-	        HttpEntity<FilialeRequest> entity = new HttpEntity<>(request, headers);
+		    // Creiamo l'oggetto della richiesta con email e filiali
+		    FilialeRequest request = new FilialeRequest(email, filiali);
 
-	        RestTemplate restTemplate = new RestTemplate();
-	        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+		    // Creazione degli headers
+		    HttpHeaders headers = new HttpHeaders();
+		    headers.setContentType(MediaType.APPLICATION_JSON);
 
-	        return response.getBody();
-	    }
+		    // Creazione della richiesta HTTP con la lista delle filiali e l'email
+		    HttpEntity<FilialeRequest> entity = new HttpEntity<>(request, headers);
+
+		    RestTemplate restTemplate = new RestTemplate();
+		    
+		    try {
+		        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+		        return response.getBody();
+		    } catch (HttpClientErrorException e) {
+		        return "Errore HTTP: " + e.getStatusCode();
+		    } catch (Exception e) {
+		        return "Errore generico: " + e.getMessage();
+		    }
+	 }
 	
 }

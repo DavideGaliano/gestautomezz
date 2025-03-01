@@ -6,7 +6,13 @@ public class FilialeRequest {
     private String email;
     private List<Filiale> filiali;
 
-    // Getters e Setters
+    // Costruttore
+    public FilialeRequest(String email, List<Filiale> filiali) {
+        this.email = email;
+        this.filiali = filiali;
+    }
+
+    // Getter e Setter
     public String getEmail() {
         return email;
     }

@@ -19,7 +19,7 @@
 				<a th:href="@{/filiali/create}" class="btn btn-success mb-4">Crea Nuova Filiale</a>
 
 				<!-- Bottone Send JSON -->
-				<button id="sendJsonButton" class="btn btn-primary mb-4">Send JSON</button>
+				<a th:href="@{/api/filiali/send}" class="btn btn-primary mb-4">Send JSON</a>
 
 				<!-- Messaggio di feedback -->
 				<div id="sendJsonMessage" class="alert d-none"></div>
@@ -112,6 +112,8 @@
 
 	<!-- Bootstrap JS and dependencies -->
 	<div th:replace="~{fragments/fragments :: scripts} "></div>
+	
+	<!--Barra di ricerca-->
 	<script>
 		function filterTable() {
 			let input = document.getElementById("searchInput").value.toLowerCase();
@@ -122,8 +124,6 @@
 		}
 	</script>
 
-	<!--Invio JSON-->
-	
 </body>
 
 </html>
